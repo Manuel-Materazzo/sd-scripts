@@ -528,6 +528,9 @@ def train(args):
         # 指定エポックごとにモデルを保存
         if args.save_every_n_epochs is not None:
             saving = (epoch + 1) % args.save_every_n_epochs == 0 and (epoch + 1) < num_train_epochs
+            if args.skip_fist_n_epochs is not None and args.skip_fist_n_epochs > 0 and args.skip_fist_n_epochs > (
+                    epoch + 1):
+                saving = False
             if is_main_process and saving:
                 ckpt_name = train_util.get_epoch_ckpt_name(args, "." + args.save_model_as, epoch + 1)
                 save_model(ckpt_name, accelerator.unwrap_model(unet), global_step, epoch + 1)
