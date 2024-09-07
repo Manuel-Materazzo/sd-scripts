@@ -2981,6 +2981,12 @@ def add_training_arguments(parser: argparse.ArgumentParser, support_dreambooth: 
         help="save checkpoint every N epochs / 学習中のモデルを指定エポックごとに保存する",
     )
     parser.add_argument(
+        "--skip_fist_n_epochs",
+        type=int,
+        default=None,
+        help="skip saving checkpoint for the first N epochs / 最初の N エポックのチェックポイントの保存をスキップします",
+    )
+    parser.add_argument(
         "--save_every_n_steps",
         type=int,
         default=None,
